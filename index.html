@@ -2,56 +2,43 @@
 <html lang="tg">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pro Hamster Clicker</title>
+    <title>Level Up Game</title>
     <style>
-        body { 
-            background: #0f0f13; color: #fff; font-family: sans-serif;
-            display: flex; flex-direction: column; align-items: center; justify-content: center;
-            height: 100vh; margin: 0; overflow: hidden;
-        }
-        .balance { font-size: 3rem; font-weight: 800; color: #ffd700; margin-bottom: 20px; }
-        .tap-area { 
-            width: 280px; height: 280px; background: radial-gradient(#3a3a45, #1a1a20);
-            border-radius: 50%; border: 8px solid #333; display: flex; align-items: center;
-            justify-content: center; cursor: pointer; transition: 0.2s; box-shadow: 0 0 30px rgba(255, 215, 0, 0.2);
-        }
-        .tap-area:active { transform: scale(0.95); border-color: #ffd700; }
-        .tap-area img { width: 180px; }
-        .floating-text { 
-            position: absolute; font-size: 2rem; font-weight: bold; color: #fff;
-            pointer-events: none; animation: floatUp 1s ease-out;
-        }
-        @keyframes floatUp {
-            0% { opacity: 1; transform: translateY(0); }
-            100% { opacity: 0; transform: translateY(-100px); }
-        }
+        body { background: #121212; color: white; display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; margin: 0; font-family: sans-serif; }
+        .info { font-size: 24px; margin-bottom: 20px; }
+        .level { font-size: 32px; color: gold; font-weight: bold; }
+        .tap-btn { width: 200px; height: 200px; background: #ff4500; border-radius: 50%; border: none; cursor: pointer; color: white; font-size: 20px; transition: 0.2s; }
+        .tap-btn:active { background: #cc3700; transform: scale(0.95); }
     </style>
 </head>
 <body>
-
-    <div class="balance" id="score">0</div>
-    <div class="tap-area" id="coin">
-        <img src="https://cdn-icons-png.flaticon.com/512/3069/3069172.png" alt="Hamster">
-    </div>
+    <div class="info">Сатҳ: <span class="level" id="level">1</span>/50</div>
+    <div class="info">Танга: <span id="score">0</span></div>
+    <button class="tap-btn" id="tapBtn">Зер кунед</button>
 
     <script>
         let score = 0;
+        let level = 1;
+        const tapBtn = document.getElementById('tapBtn');
         const scoreEl = document.getElementById('score');
-        const coin = document.getElementById('coin');
+        const levelEl = document.getElementById('level');
 
-        coin.addEventListener('click', (e) => {
-            score++;
+        tapBtn.addEventListener('mousedown', () => {
+            // Вақте тугмаро зер мекунад
+            score += level; // Дар сатҳи баландтар танга зиёдтар мешавад
             scoreEl.innerText = score;
+            
+            // Шарт барои сатҳи нав
+            if (score >= level * 10) {
+                level++;
+                levelEl.innerText = level;
+                alert("Офарин! Шумо ба сатҳи " + level + " расидед!");
+            }
 
-            // Эффекти рақами ҷаҳида
-            let span = document.createElement('span');
-            span.innerText = "+1";
-            span.className = "floating-text";
-            span.style.left = (e.clientX - 20) + 'px';
-            span.style.top = (e.clientY - 50) + 'px';
-            document.body.appendChild(span);
-            setTimeout(() => span.remove(), 1000);
+            if (level > 50) {
+                alert("Шумо ғолиб шудед!");
+                level = 1; score = 0;
+            }
         });
     </script>
 </body>

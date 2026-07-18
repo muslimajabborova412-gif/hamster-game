@@ -3,27 +3,56 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hamster Clone</title>
+    <title>Hamster Game</title>
     <style>
-        body { background-color: #1c1f24; color: white; font-family: Arial, sans-serif; text-align: center; margin-top: 50px; }
-        .coin-counter { font-size: 40px; font-weight: bold; color: #f3ba2f; margin-bottom: 20px; }
-        .hamster-btn { background: none; border: none; cursor: pointer; outline: none; }
-        .hamster-btn img { width: 200px; height: 200px; transition: transform 0.1s; }
-        .hamster-btn img:active { transform: scale(0.95); }
+        body {
+            background: linear-gradient(135deg, #1e1e2e, #000);
+            color: white;
+            font-family: 'Arial', sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            overflow: hidden;
+        }
+        .counter { font-size: 48px; font-weight: bold; color: #ffcc00; margin-bottom: 20px; }
+        .hamster {
+            width: 250px;
+            cursor: pointer;
+            transition: transform 0.1s;
+        }
+        .hamster:active { transform: scale(0.9); }
+        .click-text { position: absolute; font-size: 24px; font-weight: bold; color: white; pointer-events: none; }
     </style>
 </head>
 <body>
-    <h1>Кликер Бозӣ</h1>
-    <div class="coin-counter" id="balance">0</div>
-    <button class="hamster-btn" onclick="clickHamster()">
-        <img src="https://img.icons8.com/illustrations/opacity/2x/hamster.png" alt="Hamster">
-    </button>
+
+    <div class="counter" id="score">0</div>
+    <!-- Истифодаи расми муосир -->
+    <img src="https://cdn-icons-png.flaticon.com/512/3069/3069172.png" class="hamster" id="hamster" alt="Hamster">
+
     <script>
-        let coins = 0;
-        function clickHamster() {
-            coins++;
-            document.getElementById('balance').innerText = coins;
-        }
+        let score = 0;
+        const hamster = document.getElementById('hamster');
+        const scoreDisplay = document.getElementById('score');
+
+        hamster.addEventListener('click', (e) => {
+            score++;
+            scoreDisplay.innerText = score;
+
+            // Аниматсияи "ҷаҳидани +1"
+            let click = document.createElement('div');
+            click.innerText = "+1";
+            click.className = "click-text";
+            click.style.left = e.clientX + 'px';
+            click.style.top = (e.clientY - 50) + 'px';
+            document.body.appendChild(click);
+
+            // Нест кардани адад баъд аз 0.5 сония
+            setTimeout(() => { click.remove(); }, 500);
+        });
     </script>
 </body>
 </html>

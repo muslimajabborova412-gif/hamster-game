@@ -1,45 +1,18 @@
 <!DOCTYPE html>
 <html lang="tg">
 <head>
-    <meta charset="UTF-8">
-    <title>Level Up Game</title>
     <style>
-        body { background: #121212; color: white; display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; margin: 0; font-family: sans-serif; }
-        .info { font-size: 24px; margin-bottom: 20px; }
-        .level { font-size: 32px; color: gold; font-weight: bold; }
-        .tap-btn { width: 200px; height: 200px; background: #ff4500; border-radius: 50%; border: none; cursor: pointer; color: white; font-size: 20px; transition: 0.2s; }
-        .tap-btn:active { background: #cc3700; transform: scale(0.95); }
+        .arrow { font-size: 30px; cursor: pointer; padding: 10px; border: 1px solid #ccc; display: inline-block; }
     </style>
 </head>
 <body>
-    <div class="info">Сатҳ: <span class="level" id="level">1</span>/50</div>
-    <div class="info">Танга: <span id="score">0</span></div>
-    <button class="tap-btn" id="tapBtn">Зер кунед</button>
-
+    <h3>Уровень: 23</h3>
+    <div onclick="this.style.display='none'" class="arrow">➡️</div>
+    <div onclick="this.style.display='none'" class="arrow">⬆️</div>
+    <div onclick="this.style.display='none'" class="arrow">⬇️</div>
+    
     <script>
-        let score = 0;
-        let level = 1;
-        const tapBtn = document.getElementById('tapBtn');
-        const scoreEl = document.getElementById('score');
-        const levelEl = document.getElementById('level');
-
-        tapBtn.addEventListener('mousedown', () => {
-            // Вақте тугмаро зер мекунад
-            score += level; // Дар сатҳи баландтар танга зиёдтар мешавад
-            scoreEl.innerText = score;
-            
-            // Шарт барои сатҳи нав
-            if (score >= level * 10) {
-                level++;
-                levelEl.innerText = level;
-                alert("Офарин! Шумо ба сатҳи " + level + " расидед!");
-            }
-
-            if (level > 50) {
-                alert("Шумо ғолиб шудед!");
-                level = 1; score = 0;
-            }
-        });
+        // Ин ҷо мо логикаро менависем, ки агар ҳамаи тирҳо нест шаванд, ба Level 24 гузарем.
     </script>
 </body>
 </html>

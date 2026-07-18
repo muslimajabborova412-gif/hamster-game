@@ -3,56 +3,55 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Coin Clicker</title>
+    <title>Pro Hamster Clicker</title>
     <style>
-        body { background: #121212; display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; margin: 0; color: white; }
-        .score { font-size: 40px; margin-bottom: 20px; color: gold; }
-        
-        /* Тангаи асосӣ */
-        .main-coin { width: 150px; cursor: pointer; transition: 0.1s; }
-        .main-coin:active { transform: scale(0.9); }
-
-        /* Қуттии танга (копилка) */
-        .box { width: 100px; height: 100px; background: #333; margin-top: 50px; border-radius: 10px; display: flex; align-items: center; justify-content: center; border: 2px solid gold; }
-        
-        /* Аниматсияи тангаи парвозкунанда */
-        .flying-coin { position: absolute; width: 40px; transition: 0.5s ease-in; }
+        body { 
+            background: #0f0f13; color: #fff; font-family: sans-serif;
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            height: 100vh; margin: 0; overflow: hidden;
+        }
+        .balance { font-size: 3rem; font-weight: 800; color: #ffd700; margin-bottom: 20px; }
+        .tap-area { 
+            width: 280px; height: 280px; background: radial-gradient(#3a3a45, #1a1a20);
+            border-radius: 50%; border: 8px solid #333; display: flex; align-items: center;
+            justify-content: center; cursor: pointer; transition: 0.2s; box-shadow: 0 0 30px rgba(255, 215, 0, 0.2);
+        }
+        .tap-area:active { transform: scale(0.95); border-color: #ffd700; }
+        .tap-area img { width: 180px; }
+        .floating-text { 
+            position: absolute; font-size: 2rem; font-weight: bold; color: #fff;
+            pointer-events: none; animation: floatUp 1s ease-out;
+        }
+        @keyframes floatUp {
+            0% { opacity: 1; transform: translateY(0); }
+            100% { opacity: 0; transform: translateY(-100px); }
+        }
     </style>
 </head>
 <body>
 
-    <div class="score" id="score">0</div>
-    <img src="https://cdn-icons-png.flaticon.com/512/527/527491.png" class="main-coin" id="coin" alt="Coin">
-    <div class="box" id="box">💰</div>
+    <div class="balance" id="score">0</div>
+    <div class="tap-area" id="coin">
+        <img src="https://cdn-icons-png.flaticon.com/512/3069/3069172.png" alt="Hamster">
+    </div>
 
     <script>
         let score = 0;
+        const scoreEl = document.getElementById('score');
         const coin = document.getElementById('coin');
-        const box = document.getElementById('box');
-        const scoreDisplay = document.getElementById('score');
 
         coin.addEventListener('click', (e) => {
             score++;
-            scoreDisplay.innerText = score;
+            scoreEl.innerText = score;
 
-            // Сохтани тангаи парвозкунанда
-            let flyingCoin = document.createElement('img');
-            flyingCoin.src = "https://cdn-icons-png.flaticon.com/512/527/527491.png";
-            flyingCoin.className = "flying-coin";
-            flyingCoin.style.left = e.clientX + 'px';
-            flyingCoin.style.top = e.clientY + 'px';
-            document.body.appendChild(flyingCoin);
-
-            // Ҳаракат ба сӯи қуттӣ
-            setTimeout(() => {
-                let boxRect = box.getBoundingClientRect();
-                flyingCoin.style.left = boxRect.left + 'px';
-                flyingCoin.style.top = boxRect.top + 'px';
-                flyingCoin.style.opacity = '0';
-            }, 10);
-
-            // Нест кардани танга
-            setTimeout(() => { flyingCoin.remove(); }, 500);
+            // Эффекти рақами ҷаҳида
+            let span = document.createElement('span');
+            span.innerText = "+1";
+            span.className = "floating-text";
+            span.style.left = (e.clientX - 20) + 'px';
+            span.style.top = (e.clientY - 50) + 'px';
+            document.body.appendChild(span);
+            setTimeout(() => span.remove(), 1000);
         });
     </script>
 </body>

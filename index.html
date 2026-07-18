@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="tg">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hamster Clone</title>
+    <style>
+        body { background-color: #1c1f24; color: white; font-family: Arial, sans-serif; text-align: center; margin-top: 50px; }
+        .coin-counter { font-size: 40px; font-weight: bold; color: #f3ba2f; margin-bottom: 20px; }
+        .hamster-btn { background: none; border: none; cursor: pointer; outline: none; }
+        .hamster-btn img { width: 200px; height: 200px; transition: transform 0.1s; }
+        .hamster-btn img:active { transform: scale(0.95); }
+    </style>
+</head>
+<body>
+    <h1>Кликер Бозӣ</h1>
+    <div class="coin-counter" id="balance">0</div>
+    <button class="hamster-btn" onclick="clickHamster()">
+        <img src="https://img.icons8.com/illustrations/opacity/2x/hamster.png" alt="Hamster">
+    </button>
+    <script>
+        let coins = 0;
+        function clickHamster() {
+            coins++;
+            document.getElementById('balance').innerText = coins;
+        }
+    </script>
+</body>
+</html>
